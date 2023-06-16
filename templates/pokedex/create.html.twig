@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PokedexController!{% endblock %}
+
+{% block body %}
+    <div class="container col-md-6">
+    <h1 class="formPokemon">Ajout d'un pokémon</h1>
+
+
+        {{ form_start(pokemonForm) }}
+
+       <div class="container alert alert-dismissible alert-secondary col-md-6">
+            {{ form_label(pokemonForm.name,'Nom du Pokémon : ') }}
+            {{ form_widget(pokemonForm.name) }}
+       </div>
+
+        <div class="container alert alert-dismissible alert-secondary col-md-6">
+            {{ form_label(pokemonForm.catchDay,'Date de capture : ') }}
+            {{ form_widget(pokemonForm.catchDay) }}
+       </div>
+
+        <div class="container alert alert-dismissible alert-secondary col-md-6">
+            {{ form_label(pokemonForm.catchPlace,'Lieu de capture : ') }}
+            {{ form_widget(pokemonForm.catchPlace) }}
+       </div>
+
+        <div class="container alert alert-dismissible alert-secondary col-md-6">
+            {{ form_label(pokemonForm.level,'Niveau du Pokemon : ') }}
+            {{ form_widget(pokemonForm.level) }}
+       </div>
+
+        <div class="container alert alert-dismissible alert-secondary col-md-6">
+            {{ form_label(pokemonForm.hp,'Point de vie Max : ') }}
+            {{ form_widget(pokemonForm.hp) }}
+       </div>
+
+        <div class="container alert alert-dismissible alert-secondary col-md-6">
+            {{ form_label(pokemonForm.shiny,'brillant : ') }}
+            {{ form_widget(pokemonForm.shiny) }}
+       </div>
+
+
+        <div class="container d-grid gap-2 col-md-6" >
+            <button class=" container btn btn-lg btn-secondary col-md-5" type="submit">Envoyer</button>
+         </div>
+
+
+        {{ form_end(pokemonForm) }}
+
+
+   </div>
+{% endblock %}
+
+
+

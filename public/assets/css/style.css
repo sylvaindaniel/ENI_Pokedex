@@ -1,0 +1,13 @@
+.logo-img {
+    margin-right: 20px;
+}
+
+.formPokemon{
+    display: flex;
+    justify-content: center;
+    margin-top:20px;
+}
+.submit{
+    display: flex;
+    justify-content: center;
+}
