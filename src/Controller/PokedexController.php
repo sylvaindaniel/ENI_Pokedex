@@ -33,7 +33,7 @@ class PokedexController extends AbstractController
         dump($pokemonForm->isSubmitted());
 
 
-        if ($pokemonForm->isSubmitted()) {
+        if ($pokemonForm->isSubmitted() && $pokemonForm->isValid()) {
             try {
                 $entityManager->persist($pokemon);
                 $entityManager->flush();

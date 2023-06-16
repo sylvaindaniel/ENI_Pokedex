@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PokemonRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PokemonRepository::class)]
 class Pokemon
@@ -14,6 +15,12 @@ class Pokemon
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "pas bien")]
+    #[Assert\Length(
+        min: 4,
+        max: 50 ,
+        minMessage: "Le nom doit avoir au moins 4 caractères",
+        maxMessage: "Le nom doit avoir moins de 100 caractères" )]
     #[ORM\Column(length: 100)]
     private ?string $name = null;
 
@@ -23,9 +30,26 @@ class Pokemon
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $catchPlace = null;
 
+    #[Assert\Type(
+        type:'integer',message: "saisir un nombre entier"
+    )]
+    #[Assert\Range(
+        min: 1,
+        max: 100,
+        notInRangeMessage: "Numéro doit etre compris entre 1 et 100"
+    )]
     #[ORM\Column]
     private ?int $level = null;
 
+
+    #[Assert\Type(
+        type:'integer',message: "saisir un nombre entier"
+    )]
+    #[Assert\Range(
+        min: 1,
+        max: 100,
+        notInRangeMessage: "Numéro doit etre compris entre 50 et 500"
+    )]
     #[ORM\Column]
     private ?int $hp = null;
 

@@ -12,6 +12,7 @@
        <div class="container alert alert-dismissible alert-secondary col-md-6">
             {{ form_label(pokemonForm.name,'Nom du Pokémon : ') }}
             {{ form_widget(pokemonForm.name) }}
+            {{ form_errors(pokemonForm.name) }}
        </div>
 
         <div class="container alert alert-dismissible alert-secondary col-md-6">
@@ -22,17 +23,23 @@
         <div class="container alert alert-dismissible alert-secondary col-md-6">
             {{ form_label(pokemonForm.catchPlace,'Lieu de capture : ') }}
             {{ form_widget(pokemonForm.catchPlace) }}
-       </div>
+            {{ form_errors(pokemonForm.catchPlace) }}
+
+        </div>
 
         <div class="container alert alert-dismissible alert-secondary col-md-6">
             {{ form_label(pokemonForm.level,'Niveau du Pokemon : ') }}
             {{ form_widget(pokemonForm.level) }}
+            {{ form_errors(pokemonForm.level) }}
        </div>
 
         <div class="container alert alert-dismissible alert-secondary col-md-6">
             {{ form_label(pokemonForm.hp,'Point de vie Max : ') }}
             {{ form_widget(pokemonForm.hp) }}
-       </div>
+            {{ form_errors(pokemonForm.hp) }}
+
+
+        </div>
 
         <div class="container alert alert-dismissible alert-secondary col-md-6">
             {{ form_label(pokemonForm.shiny,'brillant : ') }}
