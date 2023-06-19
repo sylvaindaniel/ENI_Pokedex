@@ -4,23 +4,35 @@ namespace App\Controller;
 
 use App\Entity\Pokemon;
 use App\Form\PokemonType;
-use Doctrine\ORM\EntityManager;
+use App\Repository\PokemonRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Config\Framework\RequestConfig;
 
 class PokedexController extends AbstractController
 {
     #[Route('/pokedex', name: 'app_pokedex')]
-    public function index(): Response
+    public function index(PokemonRepository $pokemonRepository): Response
     {
+        $pokemons = $pokemonRepository->findAll();
+        $currentDate = new DateTime();
+
+        foreach ($pokemons as $pokemon) {
+            $captureDate = $pokemon->getCatchDay();
+            $daysDiff = $currentDate->diff($captureDate)->days;
+            $pokemon->setDaysDiff($daysDiff);
+        }
+
         return $this->render('pokedex/index.html.twig', [
             'controller_name' => 'PokedexController',
+            'pokemons' => $pokemons
         ]);
     }
+
+
 
     #[Route('/pokedex/create', name: 'create')]
     public function create(EntityManagerInterface $entityManager, Request $request): Response {
@@ -28,10 +40,6 @@ class PokedexController extends AbstractController
         $pokemonForm = $this->createForm(PokemonType::class,$pokemon);
 
         $pokemonForm->handleRequest($request);
-        dump($pokemon);
-        dump($pokemonForm);
-        dump($pokemonForm->isSubmitted());
-
 
         if ($pokemonForm->isSubmitted() && $pokemonForm->isValid()) {
             try {

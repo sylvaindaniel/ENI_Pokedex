@@ -21,6 +21,7 @@
 
         <main>
             {% block body %}{% endblock %}
+
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert-{{ label }}"> {{ message }}</div>

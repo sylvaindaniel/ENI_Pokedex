@@ -47,7 +47,7 @@ class Pokemon
     )]
     #[Assert\Range(
         min: 1,
-        max: 100,
+        max: 500,
         notInRangeMessage: "Numéro doit etre compris entre 50 et 500"
     )]
     #[ORM\Column]
@@ -55,6 +55,12 @@ class Pokemon
 
     #[ORM\Column]
     private ?bool $shiny = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $daysDiff = null;
+
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    private ?Pen $pen = null;
 
     public function getId(): ?int
     {
@@ -129,6 +135,30 @@ class Pokemon
     public function setShiny(bool $shiny): static
     {
         $this->shiny = $shiny;
+
+        return $this;
+    }
+
+    public function getDaysDiff(): ?int
+    {
+        return $this->daysDiff;
+    }
+
+    public function setDaysDiff(?int $daysDiff): static
+    {
+        $this->daysDiff = $daysDiff;
+
+        return $this;
+    }
+
+    public function getPen(): ?Pen
+    {
+        return $this->pen;
+    }
+
+    public function setPen(?Pen $pen): static
+    {
+        $this->pen = $pen;
 
         return $this;
     }

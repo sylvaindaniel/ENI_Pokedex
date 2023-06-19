@@ -11,3 +11,23 @@
     display: flex;
     justify-content: center;
 }
+
+.custom-card {
+    display: inline-block;
+    width: 300px; /* ou la largeur souhaitée pour chaque carte */
+    margin-left: 10px; /* ajustez selon l'espace souhaité entre les cartes */
+    margin-right: 10px; /* ajustez selon l'espace souhaité entre les cartes */
+    margin-top: 40px; /* ajustez selon l'espace souhaité entre les cartes */
+}
+
+.custom-card {
+    width: 300px; /* ou la largeur souhaitée pour chaque carte */
+    margin-bottom: 20px; /* ajustez selon l'espace souhaité entre les cartes */
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px; /* ajustez selon l'espace souhaité entre les cartes */
+    margin-top: 40px; /* ajustez selon l'espace souhaité entre les cartes */
+}

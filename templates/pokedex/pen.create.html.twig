@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PokedexController!{% endblock %}
+
+{%  for pen in pens %}
+    <p>{{ pen.name }}</p>
+    <p>Animals : </p>
+    <ul>
+    {% for pokemon in pen.pokemons %}
+        <li>{{ pokemon.name }}</li>
+    {% endfor %}
+    </ul
+{% endfor %}
