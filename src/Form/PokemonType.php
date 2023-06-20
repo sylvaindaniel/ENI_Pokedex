@@ -7,8 +7,10 @@ use App\Entity\Pokemon;
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class PokemonType extends AbstractType
 {
@@ -21,15 +23,11 @@ class PokemonType extends AbstractType
             ->add('level')
             ->add('hp')
             ->add('shiny')
-            ->add('pen',
-                EntityType::class,
-                [
-                    'class' => Pen::class,
-                    'choice_label' => 'name',
-                    'label' => 'Enclos',
-                    'multiple' => false,
-                    'required' => false
-                ]);
+            ->add('imageFile', FileType::class, [
+                'required' => false,
+                'label' => 'Image du Pokémon',
+                'mapped' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

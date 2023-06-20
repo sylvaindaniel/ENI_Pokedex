@@ -8,9 +8,11 @@ use App\Repository\PokemonRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class PokedexController extends AbstractController
 {
@@ -33,7 +35,7 @@ class PokedexController extends AbstractController
     }
 
 
-
+    #[isGranted("ROLE_ADMIN")]
     #[Route('/pokedex/create', name: 'create')]
     public function create(EntityManagerInterface $entityManager, Request $request): Response {
         $pokemon = new Pokemon();
@@ -43,6 +45,13 @@ class PokedexController extends AbstractController
 
         if ($pokemonForm->isSubmitted() && $pokemonForm->isValid()) {
             try {
+                    // Gérer l'upload de l'image
+                $imageFile = $pokemonForm->get('imageFile')->getData();
+
+                if ($imageFile) {
+                    $imageName = strtolower(str_replace(' ', '', $pokemon->getName())) . '.png'; // Formatage du nom de l'image
+                    $imageFile->move('assets/images', $imageName); // Déplace l'image vers le répertoire souhaité
+                }
                 $entityManager->persist($pokemon);
                 $entityManager->flush();
                 $this->addFlash('success',"Le pokémon a bien été inséré en base");
@@ -54,6 +63,16 @@ class PokedexController extends AbstractController
         return $this->render('pokedex/create.html.twig', [
             "pokemonForm" => $pokemonForm->createView()
         ]);
+    }
+
+    #[Route('pokedex/{id}',
+        name:'pokedex_details',
+        requirements: ["id"=>"\d+"],
+        methods: ["GET"] )]
+    public function details($id, PokemonRepository $pokemonRepository): Response
+    {
+        $pokemon = $pokemonRepository->find($id);
+        return $this->render('pokedex/detail.html.twig',["pokemon" => $pokemon]);
     }
 
 }

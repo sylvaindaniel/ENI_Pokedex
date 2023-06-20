@@ -7,13 +7,21 @@
     <h1 class="formPokemon">Ajout d'un pokémon</h1>
 
 
-        {{ form_start(pokemonForm) }}
+        {{ form_start(pokemonForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
 
        <div class="container alert alert-dismissible alert-secondary col-md-6">
             {{ form_label(pokemonForm.name,'Nom du Pokémon : ') }}
             {{ form_widget(pokemonForm.name) }}
             {{ form_errors(pokemonForm.name) }}
        </div>
+
+        <div class="container alert alert-dismissible alert-secondary col-md-6">
+            {{ form_label(pokemonForm.imageFile, 'Image du Pokémon : ') }}
+            {{ form_widget(pokemonForm.imageFile) }}
+            {{ form_errors(pokemonForm.imageFile) }}
+        </div>
+
+
 
         <div class="container alert alert-dismissible alert-secondary col-md-6">
             {{ form_label(pokemonForm.catchDay,'Date de capture : ') }}
@@ -40,12 +48,6 @@
         </div>
 
         <div class="container alert alert-dismissible alert-secondary col-md-6">
-            {{ form_label(pokemonForm.pen) }}
-            {{ form_widget(pokemonForm.pen) }}
-            {{ form_errors(pokemonForm.pen) }}
-        </div>
-
-        <div class="container alert alert-dismissible alert-secondary col-md-6">
             {{ form_label(pokemonForm.shiny,'brillant : ') }}
             {{ form_widget(pokemonForm.shiny) }}
        </div>
@@ -61,6 +63,8 @@
 
    </div>
 {% endblock %}
+
+
 
 
 

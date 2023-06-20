@@ -12,15 +12,16 @@ class Pokemon
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
+    //#[ORM\GeneratedValue(strategy: "NONE")]
     #[ORM\Column]
     private ?int $id = null;
 
     #[Assert\NotBlank(message: "pas bien")]
     #[Assert\Length(
         min: 4,
-        max: 50 ,
+        max: 50,
         minMessage: "Le nom doit avoir au moins 4 caractères",
-        maxMessage: "Le nom doit avoir moins de 100 caractères" )]
+        maxMessage: "Le nom doit avoir moins de 100 caractères")]
     #[ORM\Column(length: 100)]
     private ?string $name = null;
 
@@ -31,7 +32,7 @@ class Pokemon
     private ?string $catchPlace = null;
 
     #[Assert\Type(
-        type:'integer',message: "saisir un nombre entier"
+        type: 'integer', message: "saisir un nombre entier"
     )]
     #[Assert\Range(
         min: 1,
@@ -43,7 +44,7 @@ class Pokemon
 
 
     #[Assert\Type(
-        type:'integer',message: "saisir un nombre entier"
+        type: 'integer', message: "saisir un nombre entier"
     )]
     #[Assert\Range(
         min: 1,
@@ -62,9 +63,16 @@ class Pokemon
     #[ORM\ManyToOne(inversedBy: 'animals')]
     private ?Pen $pen = null;
 
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): static
+    {
+        $this->id = $id;
+        return $this;
     }
 
     public function getName(): ?string

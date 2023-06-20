@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PokedexController!{% endblock %}
+
+{% block body %}
+    <div class="body_detail">
+        <h1>Voici la carte de ton pokémon {{ pokemon.name }}</h1>
+    </div>
+<div class="body_detail">
+    <div class="card-container">
+        <div class="card text-white bg-dark  mb-3 card-container" >
+            <div class="card-header"><p>Nom : {{ pokemon.name }}</p>
+            </div>
+            <div class="card-body">
+                {% set imageName = pokemon.name|replace({' ': ''})|lower ~ '.png' %}
+                <img src="{{ asset('assets/images/' ~ imageName) }}" alt="Image du Pokémon" class="card-img-top card-img">
+                <h4 class="card-title">date de la capture :</h4>
+                <p class="card-text">{{ pokemon.catchDay|date('Y-m-d H:i:s')}}</p>
+                <h4 class="card-title">Lieu de capture :</h4>
+                <p class="card-text">{{ pokemon.catchPlace }}</p>
+                <h4 class="card-title">sa date de création :</h4>
+                <p class="card-text">{{ pokemon.level }}</p>
+                <h4 class="card-title">Point de vie :</h4>
+                <p class="card-text">{{ pokemon.hp }}</p>
+                <h4 class="card-title">Type de carte :</h4>
+                <p class="card-text">
+                    {% if pokemon.shiny %}
+                        Carte brillante
+                    {% else %}
+                        Carte classique
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+

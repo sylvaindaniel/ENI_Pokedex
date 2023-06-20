@@ -2,6 +2,15 @@
     margin-right: 20px;
 }
 
+.card-img {
+    max-width:200px;
+    max-height:200px;
+    display: block;
+    margin: 0 auto;
+    align-content: center;
+
+}
+
 .formPokemon{
     display: flex;
     justify-content: center;
@@ -18,16 +27,23 @@
     margin-left: 10px; /* ajustez selon l'espace souhaité entre les cartes */
     margin-right: 10px; /* ajustez selon l'espace souhaité entre les cartes */
     margin-top: 40px; /* ajustez selon l'espace souhaité entre les cartes */
-}
-
-.custom-card {
-    width: 300px; /* ou la largeur souhaitée pour chaque carte */
     margin-bottom: 20px; /* ajustez selon l'espace souhaité entre les cartes */
 }
+
+.body_detail {
+    display: flex;
+    justify-content: center;
+    min-height: 5vh;
+}
+
 .card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    width: 500px;
     gap: 20px; /* ajustez selon l'espace souhaité entre les cartes */
-    margin-top: 40px; /* ajustez selon l'espace souhaité entre les cartes */
+}
+
+.cell_img {
+   height: 200px;
 }
