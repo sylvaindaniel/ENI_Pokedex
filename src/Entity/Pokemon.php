@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PokemonRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -60,8 +62,8 @@ class Pokemon
     #[ORM\Column(nullable: true)]
     private ?int $daysDiff = null;
 
-    #[ORM\ManyToOne(inversedBy: 'animals')]
-    private ?Pen $pen = null;
+    #[ORM\ManyToOne(inversedBy: 'pokemons')]
+    private ?Specie $specie = null;
 
 
     public function getId(): ?int
@@ -159,15 +161,16 @@ class Pokemon
         return $this;
     }
 
-    public function getPen(): ?Pen
+    public function getSpecie(): ?Specie
     {
-        return $this->pen;
+        return $this->specie;
     }
 
-    public function setPen(?Pen $pen): static
+    public function setSpecie(?Specie $specie): static
     {
-        $this->pen = $pen;
+        $this->specie = $specie;
 
         return $this;
     }
+
 }

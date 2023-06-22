@@ -6,33 +6,58 @@
     <div class="container">
     {% for pokemon in pokemons %}
 
-        <div class="card custom-card">
-            <h3 class="card-header"><a href="{{ path('pokedex_details',{'id':pokemon.id}) }}">{{ pokemon.name }}</a></h3>
-            <div class="card-body">
-                <h5 class="card-title">
-                    {% if pokemon.shiny %}
-                        Carte brillante
-                    {% else %}
-                        Carte classique
+        <div class="card custom-card shadowCard ">
+
+
+                <h3 {% if pokemon.shiny %}
+                        class="card-header  gradient-background"
+                     {% else %}
+                        class="card-header"
                     {% endif %}
-                </h5>
-            </div>
-            <div class="cell_img">
+                >
+                    <a href="{{ path('pokedex_details',{'id':pokemon.id}) }}">{{ pokemon.name }}</a></h3>
+
+            <div  class="cell_img">
                 {% set imageName = pokemon.name|replace({' ': ''})|lower ~ '.png' %}
                 <img src="{{ asset('assets/images/' ~ imageName) }}" alt="Image du Pokémon" class="card-img-top card-img" >
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Lieu de capture :</strong> {{ pokemon.catchPlace }}</li>
+            <ul class="list-group list-group-flush ">
+
                 <li class="list-group-item"><strong>Niveau : </strong>{{ pokemon.level }}</li>
                 <li class="list-group-item"><strong>Points de vie : </strong> {{ pokemon.hp }}</li>
-                <li class="list-group-item">
-                    <strong>Capturé </strong>il y a {{ pokemon.daysDiff }} jours
-                </li>
-                <li class="list-group-item">
-                    le {{ pokemon.catchDay.format('l j F Y')}}
-                </li>
 
-            </ul>
+                {% if pokemon.specie is not null %}
+                    <li class="list-group-item"><strong>Espèce : </strong> {{ pokemon.specie.name }}</li>
+                    <li class="list-group-item"><strong>Type : </strong>
+                        {% for type in pokemon.specie.types %}
+                            {% set badgeClass %}
+                                {% if  type.name  == 'Électrique' %}
+                                    electricType
+                                {% elseif  type.name  == 'Eau' %}
+                                    EauType
+                                {% elseif  type.name  == 'Feu' %}
+                                    FeuType
+                                {% elseif  type.name  == 'Glace' %}
+                                    GlaceType
+                                {% elseif  type.name  == 'Plante' %}
+                                    PlanteType
+                                {% elseif  type.name  == 'Poison' %}
+                                    PoisonType
+                                {% elseif  type.name  == 'Fée' %}
+                                    FeeType
+                                {% else %}
+                                    DefaultType
+                                {% endif %}
+                            {% endset %}
+                            <span class="badge rounded-pill {{ badgeClass }}">{{ type.name }}</span>
+                        {% endfor %}
+                    </li>
+                {% else %}
+                    <li class="list-group-item"><strong>Espèce : </strong> Non spécifiée</li>
+                    <li class="list-group-item"><strong>Type : </strong>non défini</li>
+                {% endif %}
+
+             </ul>
         </div>
 
     {% endfor %}

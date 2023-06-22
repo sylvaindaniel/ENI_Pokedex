@@ -48,7 +48,14 @@
         </div>
 
         <div class="container alert alert-dismissible alert-secondary col-md-6">
-            {{ form_label(pokemonForm.shiny,'brillant : ') }}
+            {{ form_label(pokemonForm.specie,'Espèce ') }}
+            {{ form_widget(pokemonForm.specie) }}
+            {{ form_errors(pokemonForm.specie) }}
+        </div>
+
+
+        <div class="container alert alert-dismissible alert-secondary col-md-6">
+            {{ form_label(pokemonForm.shiny,'chromatique : ') }}
             {{ form_widget(pokemonForm.shiny) }}
        </div>
 

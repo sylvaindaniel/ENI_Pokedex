@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Pokemon;
 use App\Form\PokemonType;
+use App\Notification\NotificationService;
 use App\Repository\PokemonRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,13 +21,6 @@ class PokedexController extends AbstractController
     public function index(PokemonRepository $pokemonRepository): Response
     {
         $pokemons = $pokemonRepository->findAll();
-        $currentDate = new DateTime();
-
-        foreach ($pokemons as $pokemon) {
-            $captureDate = $pokemon->getCatchDay();
-            $daysDiff = $currentDate->diff($captureDate)->days;
-            $pokemon->setDaysDiff($daysDiff);
-        }
 
         return $this->render('pokedex/index.html.twig', [
             'controller_name' => 'PokedexController',
@@ -35,9 +29,9 @@ class PokedexController extends AbstractController
     }
 
 
-    #[isGranted("ROLE_ADMIN")]
     #[Route('/pokedex/create', name: 'create')]
-    public function create(EntityManagerInterface $entityManager, Request $request): Response {
+    #[isGranted("ROLE_USER")]
+    public function create(EntityManagerInterface $entityManager, Request $request, NotificationService $notificationService): Response {
         $pokemon = new Pokemon();
         $pokemonForm = $this->createForm(PokemonType::class,$pokemon);
 
@@ -55,6 +49,10 @@ class PokedexController extends AbstractController
                 $entityManager->persist($pokemon);
                 $entityManager->flush();
                 $this->addFlash('success',"Le pokémon a bien été inséré en base");
+                $senderMail = $this->getParameter('mail.contact');
+                $receiverMail = $this->getParameter('mail.admin');
+                $notificationService->sendPokemonEmail($senderMail,$receiverMail);
+                return $this->redirectToRoute('pokedex_details', ['id' => $pokemon->getId()]);
             } catch (\Exception $exception) {
                 $this->addFlash('danger',"Le pokémon n'a pas été inséré en base de données");
             }
@@ -72,6 +70,13 @@ class PokedexController extends AbstractController
     public function details($id, PokemonRepository $pokemonRepository): Response
     {
         $pokemon = $pokemonRepository->find($id);
+
+        $currentDate = new DateTime();
+
+        $captureDate = $pokemon->getCatchDay();
+        $daysDiff = $currentDate->diff($captureDate)->days;
+        $pokemon->setDaysDiff($daysDiff);
+
         return $this->render('pokedex/detail.html.twig',["pokemon" => $pokemon]);
     }
 

@@ -47,3 +47,117 @@
 .cell_img {
    height: 200px;
 }
+
+.small {
+    font-size: 0.6em;
+}
+
+.gradient-background {
+    background: rgb(7,36,0);
+    background: linear-gradient(148deg, rgba(7,36,0,0) 45%, rgba(250,248,41,0.4009978991596639) 77%, rgba(83,200,241,0.5690651260504201) 91%);
+
+}
+.shadowCard {
+    box-shadow: rgba(0, 0, 0, 0.3) 0 19px 38px, rgba(0, 0, 0, 0.22) 0 15px 12px;
+    background-color:#e8e9ef;
+
+}
+.shadowCard:hover {
+    animation: myAnim 2s ease 0s 1 normal forwards;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+div.shadowCard li{
+    background-color:#e8e9ef;
+}
+
+
+.electricType{
+    background-color:yellow;
+    color:#3e3f3a;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.FeuType{
+    background-color:#F47C3C;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.EauType{
+    background-color:#4592C4;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.GlaceType{
+    background-color:#51C4E7;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.PlanteType{
+    background-color:#9BCC50;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    color:#3e3f3a;
+}
+
+.PoisonType{
+    background-color:#B97FC9;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.FeeType{
+    background-color:#FDB9E9;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.DefaultType{
+    background-color:#F8F5F0;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    color:#3e3f3a;
+}
+
+
+
+.cardDetail {
+    width: 500px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    background-color:#e8e9ef;
+}
+
+.cardDetail:hover {
+    animation: myAnim 2s ease 0s 1 normal forwards;
+
+}
+
+/*ANIMATIONS DE LA CARTE DETAIL*/
+@keyframes myAnim {
+    0%,
+    100% {
+        transform: translateX(0%);
+        transform-origin: 50% 50%;
+    }
+
+    15% {
+        transform: translateX(-30px) rotate(-6deg);
+    }
+
+    30% {
+        transform: translateX(15px) rotate(6deg);
+    }
+
+    45% {
+        transform: translateX(-15px) rotate(-3.6deg);
+    }
+
+    60% {
+        transform: translateX(9px) rotate(2.4deg);
+    }
+
+    75% {
+        transform: translateX(-6px) rotate(-1.2deg);
+    }
+}
+
+.textColorMoche {
+    background: rgb(7,36,0);
+    background: linear-gradient(148deg, rgba(7,36,0,0) 45%, rgba(250,248,41,0.4009978991596639) 77%, rgba(83,200,241,0.5690651260504201) 91%);
+}

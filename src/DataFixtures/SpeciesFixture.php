@@ -2,18 +2,17 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Pokemon;
+use App\Entity\Specie;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\ORM\Id\AssignedGenerator;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
-class PokedexFixtures extends Fixture
+class SpeciesFixture extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-
-        $pokemonNames = [
+        $pokemonSpecies = [
             1 => 'Pikachu',
             2 => 'Dracaufeu',
             3 => 'Bulbizarre',
@@ -68,23 +67,27 @@ class PokedexFixtures extends Fixture
 
 
 
-        $faker = Factory::create();
 
-        foreach ( $pokemonNames as $key => $pokemonName) {
-            $pokemon = new Pokemon();
-            $pokemon->setId($key);
-            $pokemon->setName($pokemonName);
-            $pokemon->setCatchDay($faker->dateTimeBetween('-1 year'));
-            $pokemon->setCatchPlace($faker->city);
-            $pokemon->setLevel($faker->numberBetween(1, 100));
-            $pokemon->setHp($faker->numberBetween(50, 500));
-            $pokemon->setShiny($faker->boolean);
+        $i=1;
 
-            $manager->persist($pokemon);
+        foreach ( $pokemonSpecies as $key => $pokemonSpecieName) {
+            $pokemonSpecie = new Specie();
+            $pokemonSpecie->setId($key);
+            $pokemonSpecie->setNumber($i);
+            $pokemonSpecie->setName($pokemonSpecieName);
+
+            $manager->persist($pokemonSpecie);
+            $i++;
         }
 
         $manager->flush();
     }
 
 
+    public function getDependencies()
+    {
+        return [
+            TypesFixture::class
+        ];
+    }
 }

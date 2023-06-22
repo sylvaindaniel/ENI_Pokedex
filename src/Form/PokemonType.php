@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Pen;
 use App\Entity\Pokemon;
+use App\Entity\Specie;
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -27,7 +28,16 @@ class PokemonType extends AbstractType
                 'required' => false,
                 'label' => 'Image du Pokémon',
                 'mapped' => false,
-            ]);
+            ])
+            ->add('specie',EntityType::class,
+                [
+                    'class' => Specie::class,
+                    'choice_label' => 'name',
+                    'label' => 'Choisir une espèce',
+                    'multiple' => false,
+                    'required' => true
+                ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
