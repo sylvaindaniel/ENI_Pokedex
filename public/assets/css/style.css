@@ -124,7 +124,7 @@ div.shadowCard li{
 }
 
 .cardDetail:hover {
-    animation: myAnim 2s ease 0s 1 normal forwards;
+    /*animation: myAnim 2s ease 0s 1 normal forwards;*/
 
 }
 

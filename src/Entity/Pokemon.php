@@ -59,8 +59,6 @@ class Pokemon
     #[ORM\Column]
     private ?bool $shiny = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $daysDiff = null;
 
     #[ORM\ManyToOne(inversedBy: 'pokemons')]
     private ?Specie $specie = null;
@@ -149,18 +147,6 @@ class Pokemon
         return $this;
     }
 
-    public function getDaysDiff(): ?int
-    {
-        return $this->daysDiff;
-    }
-
-    public function setDaysDiff(?int $daysDiff): static
-    {
-        $this->daysDiff = $daysDiff;
-
-        return $this;
-    }
-
     public function getSpecie(): ?Specie
     {
         return $this->specie;
@@ -172,5 +158,7 @@ class Pokemon
 
         return $this;
     }
+
+
 
 }

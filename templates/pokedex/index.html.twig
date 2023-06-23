@@ -31,7 +31,7 @@
                     <li class="list-group-item"><strong>Type : </strong>
                         {% for type in pokemon.specie.types %}
                             {% set badgeClass %}
-                                {% if  type.name  == 'Électrique' %}
+                                {% if  type.name  == 'Électrik' %}
                                     electricType
                                 {% elseif  type.name  == 'Eau' %}
                                     EauType
@@ -43,7 +43,7 @@
                                     PlanteType
                                 {% elseif  type.name  == 'Poison' %}
                                     PoisonType
-                                {% elseif  type.name  == 'Fée' %}
+                                {% elseif  type.name  == 'Psy' %}
                                     FeeType
                                 {% else %}
                                     DefaultType

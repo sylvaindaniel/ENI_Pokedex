@@ -75,9 +75,12 @@ class PokedexController extends AbstractController
 
         $captureDate = $pokemon->getCatchDay();
         $daysDiff = $currentDate->diff($captureDate)->days;
-        $pokemon->setDaysDiff($daysDiff);
+        dump($daysDiff);
+        //$pokemon->setDaysDiff($daysDiff);
 
-        return $this->render('pokedex/detail.html.twig',["pokemon" => $pokemon]);
+        return $this->render('pokedex/detail.html.twig',[
+            "pokemon" => $pokemon,
+            "daysDiff" => $daysDiff]);
     }
 
 }

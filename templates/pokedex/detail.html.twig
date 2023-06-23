@@ -24,15 +24,15 @@
                 <h4 class="card-title">Lieu de capture :</h4>
                 <p class="card-text">{{ pokemon.catchPlace }}</p>
                 <h4 class="card-title">date de la capture :</h4>
-                <p class="card-text">il y a {{ pokemon.daysDiff }} jours <span class="small">({{ pokemon.catchDay.format('j F Y')}})</span></p>
-                <h4 class="card-title">sa date de création :</h4>
+                <p class="card-text">il y a {{ daysDiff }} jours <span class="small">({{ pokemon.catchDay.format('j F Y')}})</span></p>
+                <h4 class="card-title">son level :</h4>
                 <p class="card-text">{{ pokemon.level }}</p>
                 <h4 class="card-title">Point de vie :</h4>
                 <p class="card-text">{{ pokemon.hp }}</p>
                 <h4 class="card-title">Type de pokémon :</h4>
                 {% for type in pokemon.specie.types %}
                     {% set badgeClass %}
-                        {% if  type.name  == 'Électrique' %}
+                        {% if  type.name  == 'Électrik' %}
                             electricType
                         {% elseif  type.name  == 'Eau' %}
                             EauType
@@ -44,7 +44,7 @@
                             PlanteType
                         {% elseif  type.name  == 'Poison' %}
                             PoisonType
-                        {% elseif  type.name  == 'Fée' %}
+                        {% elseif  type.name  == 'Psy' %}
                             FeeType
                         {% else %}
                             DefaultType
